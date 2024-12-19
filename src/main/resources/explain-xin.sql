@@ -1,37 +1,12 @@
-/**????*/
-# select * from user u
-# join course c on c.teacher_id=u.id
-# join appointment a on a.course_id=c.id
-# join lab l l.id=a.lab_id
-# where u.id='1';
+/**指定老师的课表*/
+/**
 explain
-select * from appointment a where a.teacher ->> '$.id'='1';
-/**查的多改的少*/
-explain
-select * from  appointment a where a.teacher ->> '$.id'='1' and a.course ->> '$.id'='1';
-explain
-select * from  appointment a where a.lab_id= '1' and semester='24-1' and a.week=1 and a.dayofweek=1 and a.section=1;
-explain
-/**基于学期/周/星期/节，查询可用实验室 查询不存在必须得在关联的时候查出来，在where做标识为空*/
-select * from `2022222979`.lab l
-left join appointment a
-on l.id=a.lab_id and semester='24-1' and a.week=1 and a.dayofweek=1 and a.section=1
-where a.lab_id is null and l.state=1;
-/**空闲实验室*/
-/**冗余*/
-
-explain
-select * from lab l left join  appointment a on l.id = a.lab_id
-and a.teacher ->> '$.id' = '1' and a.course->>'$.id' = '1'
-where a.lab_id is null and l.state=1;
-
-show index in appointment;
-# 基于学期/周/星期，查询用空闲节的可用教室
-explain
-select * from lab l
-left join appointment a
-on l.id = a.lab_id and semester='24-1' and a.week=1 and a.dayofweek=1
-where a.lab_id is null and a.section is null and l.state=1;
+select * from user u
+  join `2022222994`.course c on c.teacher_id = u.id
+  join appointment a on c.id = a.course_id
+  join `2022222994`.lab on a.lab_id = lab.id
+where u.id = '1';
+*/
 
 -- 1.指定老师的课表
 explain
@@ -44,20 +19,15 @@ where a.teacher ->> '$.id' = '1';
 explain
 select * from lab l
 left join appointment a
-on l.id=a.lab_id and a.semester='24-1' and a.week=1 and a.dayofweek=2 and a.section=3
+on l.id=a.lab_id and a.semester='25-1' and a.week=1 and a.dayofweek=2 and a.section=3
 where a.lab_id is null and l.state = 1;
 
 -- 3.基于周/星期，查询空闲节可用教室
-# CROSS JOIN 是一种笛卡尔积连接，将 lab 表中的每一行与 s 表中的每一行连接。s 表是一个内联的子查询，它生成了一个包含四个值（1、2、3、4）的虚拟表，表示四个节次。
-# 这个 CROSS JOIN 的目的是生成一个实验室和每个节次的组合。
-# GROUP_CONCAT 是一个聚合函数，它将同一组内的多个节次连接成一个字符串。
-# ORDER BY s.section 确保返回的节次是按升序排列的。
-# 结果会给出一个字段 free_sections，表示每个实验室的未预约节次，多个节次用逗号隔开。
 explain
 SELECT
-l.id AS lab_id,
-l.name AS lab_name,
-GROUP_CONCAT(s.section ORDER BY s.section) AS free_sections
+    l.id AS lab_id,
+    l.name AS lab_name,
+    GROUP_CONCAT(s.section ORDER BY s.section) AS free_sections
 FROM
     lab l
         CROSS JOIN
@@ -77,10 +47,6 @@ GROUP BY
     l.id, l.name;
 
 -- 4.根据老师id查出该老师所有的预约课程
-# JSON_EXTRACT(a.teacher, '$.id') AS teacher_id：
-# 从 teacher 字段中提取 id，并将其命名为 teacher_id。
-# 假设 teacher 字段是一个 JSON 格式的数据，$.id 表示提取 teacher 对象中的 id 字段。
-explain
 SELECT
     a.id AS appointment_id,
     JSON_EXTRACT(a.teacher, '$.id') AS teacher_id,
@@ -121,7 +87,7 @@ WHERE
 
 -- 6.根据课程id和老师id查某个老师某个学期某门课的预约情况
 SELECT
-    a.id AS appointment_id,
+a.id AS appointment_id,
     JSON_EXTRACT(a.teacher, '$.id') AS teacher_id,
     JSON_EXTRACT(a.teacher, '$.name') AS teacher_name,
     JSON_EXTRACT(a.course, '$.id') AS course_id,
@@ -137,5 +103,5 @@ FROM
     appointment a
 WHERE
     JSON_EXTRACT(a.teacher, '$.id') = '1' -- 替换为具体老师ID
-  AND JSON_EXTRACT(a.course, '$.id') = '1' -- 替换为具体课程ID
-  AND a.semester = '24-1'; -- 替换为具体学期
+    AND JSON_EXTRACT(a.course, '$.id') = '1' -- 替换为具体课程ID
+    AND a.semester = '24-1'; -- 替换为具体学期

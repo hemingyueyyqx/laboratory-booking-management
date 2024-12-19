@@ -1,6 +1,5 @@
 package org.example.laboratorybookingmanagement.dox;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,18 +14,13 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
-    public static final String USER = "Js09";
-    public static final String ADMIN = "Sj08";
+public class News {
     @Id
     @CreatedBy
     private String id;
-    private String name;
-    private String account;
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String password;
-    private String role;
-    private String telephone;
+    private String title;
+    private String content;
+    private String author;
     @ReadOnlyProperty
     private LocalDateTime createTime;
     @ReadOnlyProperty
