@@ -42,7 +42,7 @@ create table if not exists `appointment-json` (
 create table if not exists `appointment` (
 id char(26) primary key,
 teacher json  not null comment '{id, name}',/**要不要有该字段*/
-course json not null comment '{id,name}',
+course json not null comment '{id,name，}',
 # lab json not null comment '{id,name}',
 lab_id char(26) not null ,/**json冗余形式on关联时命中不了索引，针对MySQL索引字段使用函数，则索引失效，MySQL的bug*/
 lab_name varchar(10) not null ,

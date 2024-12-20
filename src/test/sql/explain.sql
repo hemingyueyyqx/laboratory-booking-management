@@ -33,7 +33,7 @@ left join appointment a
 on l.id = a.lab_id and semester='24-1' and a.week=1 and a.dayofweek=1
 where a.lab_id is null and a.section is null and l.state=1;
 
--- 1.指定老师的课表
+-- 1.指定老师的课表,查课程信息，班级，实验室，周次，星期，节次，a表，并course表查班级?
 explain
 select * from appointment a
 where a.teacher ->> '$.id' = '1';
@@ -139,3 +139,26 @@ WHERE
     JSON_EXTRACT(a.teacher, '$.id') = '1' -- 替换为具体老师ID
   AND JSON_EXTRACT(a.course, '$.id') = '1' -- 替换为具体课程ID
   AND a.semester = '24-1'; -- 替换为具体学期
+
+# 7、加载当前教师全部课程，基于id，course表
+select * from `2022222979`.course c
+where c.teacher_id=1;
+# 8、加载人数可用实验室，基于教师id.课程id,查可用实验室?
+select a.lab_name from `2022222979`.appointment a
+join `2022222979`.lab l
+on l.id = a.lab_id
+join `2022222979`.course c
+on a.course ->> '$.id'=c.id
+where a.teacher ->> '$.id' = '1' and a.course->>'$.id' = '1'and l.state=1 and c.quantity<l.quantity;
+# 9、加载全部可用实验室，基于教师id.课程id,仅加载名称
+select l.name from `2022222979`.lab l
+where l.state = 1;
+# 10、基于指定教室，加载课表
+select * from `2022222979`.appointment a
+where a.lab_name='901';
+# 11、基于教室id，课程id，查询预约信息
+select *
+from `2022222979`.appointment a
+where a.teacher ->> '$.id'=1 and a.course ->> '$.id'=1;
+
+

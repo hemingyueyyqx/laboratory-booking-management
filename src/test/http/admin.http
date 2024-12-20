@@ -1,0 +1,11 @@
+POST http://localhost:8080/api/admin/users
+#token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiSnMwOSIsInVpZCI6IjAxSkZKNUNXWTZGRDRYVFRIUjQyRkJTNkE0IiwiaWF0IjoxNzM0NzAyNzczLCJleHAiOjE3MzQ3ODkxNzN9.ia_MMNGbeoOR6_9ZPD5VfSLwCUwgCWOkrynHi8mkAsw
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiU2owOCIsInVpZCI6IjAxSkZIWFpOU0Q2Nk41NUVITU5KUzVZRVBSIiwiaWF0IjoxNzM0NzAyNDk2LCJleHAiOjE3MzQ3ODg4OTZ9.n4_jNoCFhFrlbHtqzd0iYwKEFNhpjW9p9_CewbwgrTU
+Content-Type: application/json
+
+{
+  "name": "王五",
+  "account": "2022222979",
+  "role": "Js09",
+  "telephone": "18345930160"
+}

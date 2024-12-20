@@ -25,12 +25,12 @@ class UserRepositoryTest {
     }
     @Test
     public void saveUser() {
-        String account = "2022222909";
+        String account = "2022222998";
         User user = User.builder()
-                .name("张三")
+                .name("赵六")
                 .account(account)
                 .password(passwordEncoder.encode(account))
-                .role(User.ADMIN)
+                .role(User.USER)
                 .telephone("18346789032")
                 .build();
         userRepository.save(user);

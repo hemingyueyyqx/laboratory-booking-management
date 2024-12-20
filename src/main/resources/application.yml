@@ -16,6 +16,11 @@ logging:
       example: debug
   pattern:
     console: '%-5level %C.%M[%line] - %msg%n'
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /api
 
 
 

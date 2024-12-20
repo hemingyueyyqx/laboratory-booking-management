@@ -7,5 +7,4 @@ import org.springframework.data.repository.ListCrudRepository;
 public interface UserRepository extends ListCrudRepository<User, String> {
     User findByAccount(String account);
 
-
 }
