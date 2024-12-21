@@ -18,9 +18,12 @@ logging:
     console: '%-5level %C.%M[%line] - %msg%n'
 springdoc:
   api-docs:
-    enabled: true
+    enabled: true # 开启OpenApi接口
+    path: /v3/api-docs  # 自定义路径，默认为 "/v3/api-docs"
   swagger-ui:
-    path: /api
+    enabled: true # 开启swagger界面，依赖OpenApi，需要OpenApi同时开启
+    path: /swagger-ui/index.html # 自定义路径，默认为"/swagger-ui/index.html"
+
 
 
 
