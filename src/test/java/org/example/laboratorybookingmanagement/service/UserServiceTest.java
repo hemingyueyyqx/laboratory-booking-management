@@ -41,7 +41,7 @@ class UserServiceTest {
 
     @Test
     void addUser() {
-        User user = User.builder().name("张三").account("2089097867").role(User.USER).telephone("18978654532").build();
+        User user = User.builder().name("张三").account("2089097867").role(User.Teacher).telephone("18978654532").build();
         userService.addUser(user);
     }
 

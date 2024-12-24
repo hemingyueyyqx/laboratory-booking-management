@@ -62,6 +62,7 @@ create table if not exists `lab` (
     quantity tinyint unsigned null ,/**可空 非负0-255*/
     description varchar(500) null, /***可空*/
     manager json comment '{id, name}' null , /**可能为空*/
+    enable_equipment tinyint unsigned,
     index(state)
     );
 

@@ -26,6 +26,9 @@ public class LoginController {
     private final JWTComponent jwtComponent;
     @PostMapping("login")
     public ResultVo login(@RequestBody User user, HttpServletResponse response) {
+//        String account = loginData.get("account");
+//        String password = loginData.get("password");
+
         User userR = userService.getUser(user.getAccount());
         if (userR == null || !passwordEncoder.matches(user.getPassword(), userR.getPassword())) {
             return ResultVo.error(Code.LOGIN_ERROR);

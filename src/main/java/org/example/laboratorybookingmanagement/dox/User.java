@@ -16,8 +16,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    public static final String USER = "Js09";
+    public static final String Teacher = "Js09";
     public static final String ADMIN = "Sj08";
+    public static final String LABMANAGER = "lM07";
     @Id
     @CreatedBy
     private String id;
