@@ -16,8 +16,9 @@ public class Lab {
     @CreatedBy
     private String id;
     private String name;
-    private short state;
-    private short quantity;
+    private int state;
+    private int quantity;
     private String description;
     private String manager;
+    private int enableEquipment;
 }

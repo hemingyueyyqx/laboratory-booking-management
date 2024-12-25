@@ -21,8 +21,8 @@ public class Appointment {
     private String labName;
     private String semester;
     private String nature;
-    private short week;
-    private short dayofweek;
-    private short section;
+    private int week;
+    private int dayofweek;
+    private int section;
 
 }

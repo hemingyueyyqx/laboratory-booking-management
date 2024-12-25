@@ -16,11 +16,11 @@ public class Course {
     @CreatedBy
     private String id;
     private String name;
-    private short quantity;
+    private int quantity;
     private String semester;
     private String clazz;
-    private short type;
+    private int type;
     private String teacherId;
-    private short experimentHour;
+    private int experimentHour;
 
 }
