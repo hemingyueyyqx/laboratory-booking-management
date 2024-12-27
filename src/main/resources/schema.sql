@@ -63,7 +63,8 @@ create table if not exists `lab` (
     description varchar(500) null, /***可空*/
     manager json comment '{id, name}' null , /**可能为空*/
     enable_equipment tinyint unsigned,
-    index(state)
+    index(state),
+    unique (name)
     );
 
 create table if not exists `news` (

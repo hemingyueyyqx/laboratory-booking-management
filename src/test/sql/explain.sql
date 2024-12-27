@@ -36,7 +36,7 @@ where a.lab_id is null and a.section is null and l.state=1;
 -- 1.指定老师的课表,查课程信息，班级，实验室，周次，星期，节次，a表，并course表查班级?
 explain
 select * from appointment a
-where a.teacher ->> '$.id' = '1';
+where a.teacher ->> '$.id' = '1' and a.course ->> '$.id' = '1';
 
 
 
@@ -156,9 +156,44 @@ where l.state = 1;
 # 10、基于指定教室，加载课表
 select * from `2022222979`.appointment a
 where a.lab_name='901';
-# 11、基于教室id，课程id，查询预约信息
+# 11、基于教师id，课程id，查询预约信息
+explain
 select *
 from `2022222979`.appointment a
-where a.teacher ->> '$.id'=1 and a.course ->> '$.id'=1;
+where a.teacher ->> '$.id'='1' and a.course ->> '$.id'='1';
+# 12、基于老师id，课程id，查所有周次 全索引index
+explain
+SELECT
+    CAST(teacher ->> '$.id' AS CHAR(26)) AS teacher_id,
+    CAST(course ->> '$.id' AS CHAR(26)) AS course_id,
+    CONCAT(GROUP_CONCAT(week ORDER BY week ASC)
+    ) AS weeks
+FROM
+    appointment a
+ where a.teacher ->> '$.id'='1' and a.course ->> '$.id'='1'
+GROUP BY
+    teacher_id, course_id;
+# 基于老师id，课程id，查课表
+explain
+SELECT
+    a.teacher ->>'$.name' as teacherName,
+    c.name as courseName,
+    c.clazz ,
+    CONCAT(GROUP_CONCAT(a.week ORDER BY a.week ASC)) AS weeks,
+    c.experiment_hour,
+    a.lab_name
+FROM
+    appointment a
+        JOIN
+    course c ON a.teacher ->> '$.id' = c.teacher_id AND a.course ->> '$.id' = c.id
+WHERE
+    a.teacher ->> '$.id' = '1' AND a.course ->> '$.id' = '1'
+GROUP BY
+    a.teacher ->> '$.id', a.course ->> '$.id', a.teacher ->>'$.name',c.name, c.clazz, c.experiment_hour, a.lab_name;
+
+
+
+
+
 
 
