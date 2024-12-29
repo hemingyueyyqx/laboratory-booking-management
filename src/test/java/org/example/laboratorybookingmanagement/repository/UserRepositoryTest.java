@@ -2,10 +2,13 @@ package org.example.laboratorybookingmanagement.repository;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.laboratorybookingmanagement.dox.User;
+import org.example.laboratorybookingmanagement.dto.Course1;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.List;
 
 
 @SpringBootTest
@@ -25,13 +28,13 @@ class UserRepositoryTest {
     }
     @Test
     public void saveUser() {
-        String account = "2022223008";
+        String account = "2022229078";
         User user = User.builder()
-                .name("zs")
+                .name("ls")
                 .account(account)
                 .password(passwordEncoder.encode(account))
                 .role(User.LABMANAGER)
-                .telephone("18346709123")
+                .telephone("18346789765")
                 .build();
         userRepository.save(user);
     }
@@ -45,4 +48,12 @@ class UserRepositoryTest {
         log.debug("{}", userRepository.count());
     }
 
+
+    @Test
+    void findCourseByTeacherId() {
+        List<Course1> course1s = userRepository.findCourseByTeacherId("01JFJ5CWY6FD4XTTHR42FBS6A4");
+        for(Course1 course1 : course1s) {
+            log.debug("{}",course1);
+        }
+    }
 }

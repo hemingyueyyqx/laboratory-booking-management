@@ -187,9 +187,27 @@ FROM
         JOIN
     course c ON a.teacher ->> '$.id' = c.teacher_id AND a.course ->> '$.id' = c.id
 WHERE
-    a.teacher ->> '$.id' = '1' AND a.course ->> '$.id' = '1'
+    a.teacher ->> '$.id' = '01JFJ5CWY6FD4XTTHR42FBS6A4'
 GROUP BY
-    a.teacher ->> '$.id', a.course ->> '$.id', a.teacher ->>'$.name',c.name, c.clazz, c.experiment_hour, a.lab_name;
+    a.teacher ->> '$.id', a.course ->> '$.id', teacherName,courseName, c.clazz, c.experiment_hour, a.lab_name;
+explain
+SELECT
+    a.dayofweek,
+    a.section,
+    a.teacher ->>'$.name' as teacherName,
+    c.name as courseName,
+    c.clazz ,
+    CONCAT(GROUP_CONCAT(a.week ORDER BY a.week ASC)) AS weeks,
+    c.experiment_hour,
+    a.lab_name
+FROM
+    appointment a
+        JOIN
+    course c ON a.teacher ->> '$.id' = c.teacher_id AND a.course ->> '$.id' = c.id
+# WHERE
+#     a.teacher ->> '$.id' = '1'
+GROUP BY
+    a.teacher ->> '$.id', a.course ->> '$.id',a.dayofweek,a.section, teacherName,courseName, c.clazz, c.experiment_hour, a.lab_name;
 
 
 
