@@ -84,5 +84,27 @@ create table if not exists `news` (
 # ('5', '基础化学', 80, '24-1', '化学工程与工艺', 1, 2, 8),
 # ('6', '英语听力', 100, '24-1', '英语', 1, 1, 8);
 
-
+-- 插入第一条记录
+# INSERT INTO `lab` (`id`, `name`, `state`, `quantity`, `description`, `manager`, `enable_equipment`)
+# VALUES ('00000000000000000000000001', '901', 1, 50, '这是一个功能齐全的实验室', '{"id": "111111", "name": "张经理"}', 45);
+#
+# -- 插入第二条记录
+# INSERT INTO `lab` (`id`, `name`, `state`, `quantity`, `description`, `manager`, `enable_equipment`)
+# VALUES ('00000000000000000000000002', '902', 1, 50, '主要用于AI算法研究', NULL, 50);
+#
+# -- 插入第三条记录
+# INSERT INTO `lab` (`id`, `name`, `state`, `quantity`, `description`, `manager`, `enable_equipment`)
+# VALUES ('00000000000000000000000003', '903', 1, 50, '专注于大数据处理相关实验', '{"id": "222222", "name": "李经理"}', 50);
+#
+# -- 插入第四条记录
+# INSERT INTO `lab` (`id`, `name`, `state`, `quantity`, `description`, `manager`, `enable_equipment`)
+# VALUES ('00000000000000000000000004', '904', 1, 50, '用于物联网项目开发与测试', NULL, 49);
+#
+# -- 插入第五条记录
+# INSERT INTO `lab` (`id`, `name`, `state`, `quantity`, `description`, `manager`, `enable_equipment`)
+# VALUES ('00000000000000000000000005', '905', 1, 130, '提供软件开发的环境', '{"id": "333333", "name": "王经理"}', 128);
+#
+# -- 插入第六条记录
+# INSERT INTO `lab` (`id`, `name`, `state`, `quantity`, `description`, `manager`, `enable_equipment`)
+# VALUES ('00000000000000000000000006', '906', 1, 130, '专注于图像识别等视觉相关研究', NULL, 127);
 

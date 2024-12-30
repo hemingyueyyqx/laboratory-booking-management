@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 @Slf4j
 class CourseRepositoryTest {
@@ -61,5 +61,25 @@ class CourseRepositoryTest {
         for(Course c : courses) {
             log.debug("{}",c);
         }
+    }
+
+    @Test
+    void findCountByTeacherIdAndCourseId() {
+        int count = courseRepository.findCountByTeacherIdAndCourseId("01JFJ951VSQA8B0DE5P1PTV5EJ","3");
+        log.debug("{}",count);
+    }
+
+    @Test
+    void deleteCourseByTeacherIdAndCourseId() {
+
+        courseRepository.deleteCourseByTeacherIdAndCourseId("10","4");
+    }
+
+    @Test
+    void deleteCoursesByTeacherIdAndCourseIds() {
+        List<String> ids = new ArrayList<>();
+        ids.add("4");
+        ids.add("5");
+        courseRepository.deleteCoursesByTeacherIdAndCourseIds("10",ids);
     }
 }

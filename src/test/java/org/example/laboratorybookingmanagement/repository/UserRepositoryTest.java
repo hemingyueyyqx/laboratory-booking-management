@@ -2,7 +2,8 @@ package org.example.laboratorybookingmanagement.repository;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.laboratorybookingmanagement.dox.User;
-import org.example.laboratorybookingmanagement.dto.Course1;
+import org.example.laboratorybookingmanagement.dto.Appointment1;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -51,9 +52,9 @@ class UserRepositoryTest {
 
     @Test
     void findCourseByTeacherId() {
-        List<Course1> course1s = userRepository.findCourseByTeacherId("01JFJ5CWY6FD4XTTHR42FBS6A4");
-        for(Course1 course1 : course1s) {
-            log.debug("{}",course1);
+        List<Appointment1> appointment1s = userRepository.findCourseByTeacherId("01JFJ5CWY6FD4XTTHR42FBS6A4");
+        for(Appointment1 appointment1 : appointment1s) {
+            log.debug("{}",appointment1);
         }
     }
 }

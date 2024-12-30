@@ -30,4 +30,9 @@ public class AdminController {
     public ResultVo getUsers() {
         return ResultVo.success(userService.listUsers());
     }
+    //查看所有实验室
+    @GetMapping("labs")
+    public ResultVo listLabs() {
+        return ResultVo.success(userService.listLabs());
+    }
 }

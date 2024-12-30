@@ -2,9 +2,11 @@ package org.example.laboratorybookingmanagement.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.laboratorybookingmanagement.dox.Lab;
 import org.example.laboratorybookingmanagement.dox.User;
 import org.example.laboratorybookingmanagement.exception.Code;
 import org.example.laboratorybookingmanagement.exception.XException;
+import org.example.laboratorybookingmanagement.repository.LabRepository;
 import org.example.laboratorybookingmanagement.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import java.util.List;
 public class UserService {
     private  final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final LabRepository labRepository;
 
     //通过账号查找用户
     public User getUser(String account) {
@@ -57,5 +60,8 @@ public class UserService {
     public List<User> listUsers() {
         return userRepository.findAll();
     }
-
+    //列出所有实验室
+    public List<Lab> listLabs() {
+        return labRepository.findAll();
+    }
 }

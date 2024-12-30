@@ -173,7 +173,17 @@ FROM
  where a.teacher ->> '$.id'='1' and a.course ->> '$.id'='1'
 GROUP BY
     teacher_id, course_id;
-# 基于老师id，课程id，查课表
+# 13、基于老师id，课程id，查课表
+explain
+SELECT
+   a.*,c.*
+
+FROM
+    appointment a
+       left JOIN
+    course c ON a.teacher ->> '$.id' = c.teacher_id AND a.course ->> '$.id' = c.id
+WHERE
+    a.teacher ->> '$.id' = '01JFJ5CWY6FD4XTTHR42FBS6A4';
 explain
 SELECT
     a.teacher ->>'$.name' as teacherName,
@@ -194,24 +204,52 @@ explain
 SELECT
     a.dayofweek,
     a.section,
-    a.teacher ->>'$.name' as teacherName,
-    c.name as courseName,
-    c.clazz ,
-    CONCAT(GROUP_CONCAT(a.week ORDER BY a.week ASC)) AS weeks,
+    a.teacher,
+    a.course,
+    c.clazz,
+    JSON_ARRAYAGG(a.week) AS weeks,  -- 使用JSON_ARRAYAGG函数将week值聚合成JSON数组
     c.experiment_hour,
+    a.lab_id,
     a.lab_name
 FROM
     appointment a
         JOIN
     course c ON a.teacher ->> '$.id' = c.teacher_id AND a.course ->> '$.id' = c.id
-# WHERE
-#     a.teacher ->> '$.id' = '1'
+WHERE
+    a.teacher ->> '$.id' = '01JFJ5CWY6FD4XTTHR42FBS6A4'
 GROUP BY
-    a.teacher ->> '$.id', a.course ->> '$.id',a.dayofweek,a.section, teacherName,courseName, c.clazz, c.experiment_hour, a.lab_name;
+    a.teacher ->> '$.id', a.course ->> '$.id',a.dayofweek,a.section, a.teacher,a.course, c.clazz, c.experiment_hour, a.lab_id,a.lab_name;
+# 14、基于老师id，课程id，查a表中有几条记录，乘2即已经选了多少课时lab
+explain
+SELECT COUNT(*) AS record_count
+FROM `appointment`
+WHERE teacher ->> '$.id' = '01JFJ5CWY6FD4XTTHR42FBS6A4'
+  AND course ->> '$.id' = '1';
+# 15、基于老师id，课程id，渲染状态可用，人数可用教室
+explain
+select l.id,l.name,l.state,l.quantity,l.description,l.enable_equipment,l.manager from lab l
+join appointment a on a.lab_id = l.id
+join course c on a.course ->> '$.id' = c.id
+where l.state = 1 and a.teacher ->> '$.id' = '01JFMF27TJ1TF9YQ240HG7P7EW'and a.course ->> '$.id'='01JG8N7SWX4V02GKEQCJ8K81S8' and c.quantity < l.quantity;
+explain
+SELECT l.*
+FROM `lab` l, `course` c
+WHERE l.quantity >= c.quantity
+  AND c.teacher_id = '01JFHY1JRC5BJN919YEHQYXWAR'
+  AND c.id = '2'and l.state =1;
+# 16、基于老师id，课程id，渲染状态可用，人数不够教室
+explain
+SELECT l.*
+FROM lab l
+join  course c on l.quantity < c.quantity
+WHERE c.teacher_id = '01JFHY1JRC5BJN919YEHQYXWAR'and c.id = '2'and l.state =1;
 
-
-
-
-
-
-
+delete from course c where c.teacher_id='10' and c.id='4';
+# 17、基于老师id，课程id查预约表中记录
+SELECT COUNT(*) AS record_count
+FROM `appointment`
+WHERE teacher ->> '$.id' = '01JFJ5CWY6FD4XTTHR42FBS6A4'
+  AND course ->> '$.id' = '1';
+# 18、基于实验室id，渲染预约表
+explain
+select * from appointment a where a.lab_id = '1'
