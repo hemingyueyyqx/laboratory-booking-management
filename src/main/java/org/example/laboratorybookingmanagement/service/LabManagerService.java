@@ -76,10 +76,17 @@ public class LabManagerService {
     }
      //修改实验室状态
     @Transactional
-    public void updateLab(Lab lab) {
+    public void updateLab(String role,Lab lab) {
         Lab l = labRepository.findById(lab.getId()).orElse(null);
         if(l == null) {
             throw XException.builder().number(Code.ERROR).message("实验室不存在").build();
+        }
+        if(!role.equals("lM07")) {
+            throw XException.builder()
+                    .code(Code.FORBIDDEN)
+                    .number(Code.FORBIDDEN.getCode())
+                    .message(Code.FORBIDDEN.getMessage())
+                    .build();
         }
         labRepository.save(lab);
     }
@@ -88,7 +95,7 @@ public class LabManagerService {
     public List<Lab> getLabs(String id) {
         User u  = userRepository.findById(id).orElse(null);
         if(u == null) {
-            throw XException.builder().number(Code.ERROR).message("老师不存在").build();
+            throw XException.builder().number(Code.ERROR).message("用户不存在").build();
         }
        return labRepository.findLabs(id);
     }

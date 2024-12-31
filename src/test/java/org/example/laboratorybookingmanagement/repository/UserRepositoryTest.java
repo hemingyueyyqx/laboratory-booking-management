@@ -52,7 +52,7 @@ class UserRepositoryTest {
 
     @Test
     void findCourseByTeacherId() {
-        List<Appointment1> appointment1s = userRepository.findCourseByTeacherId("01JFJ5CWY6FD4XTTHR42FBS6A4");
+        List<Appointment1> appointment1s = userRepository.findCourseByTeacherIdAndSemester("24-1","01JFJ5CWY6FD4XTTHR42FBS6A4");
         for(Appointment1 appointment1 : appointment1s) {
             log.debug("{}",appointment1);
         }

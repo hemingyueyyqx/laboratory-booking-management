@@ -22,9 +22,9 @@ FROM
         JOIN
     course c ON a.teacher ->> '$.id' = c.teacher_id AND a.course ->> '$.id' = c.id
 WHERE
-    a.teacher ->> '$.id' = :teacherId
+    a.teacher ->> '$.id' = :teacherId and a.semester=:semester
 """ , resultSetExtractorClass = Appointment1ResultSetExtractor.class)
-    List<Appointment1> findCourseByTeacherId(String teacherId);
+    List<Appointment1> findCourseByTeacherIdAndSemester(String semester,String teacherId);
 
 
     }

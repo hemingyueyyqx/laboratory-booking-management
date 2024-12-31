@@ -1,6 +1,9 @@
 package org.example.laboratorybookingmanagement.repository;
 
 import org.example.laboratorybookingmanagement.dox.Lab;
+import org.example.laboratorybookingmanagement.dto.EnableEquipmentCount;
+import org.example.laboratorybookingmanagement.dto.LabCountDTO;
+import org.example.laboratorybookingmanagement.dto.LabDTO;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Repository;
@@ -29,5 +32,19 @@ WHERE c.teacher_id =:teacherId and c.id = :courseId and l.state =1;
 select * from lab l where l.manager ->> '$.id' =:id
 """)
     List<Lab> findLabs(String id);
+    @Query("""
+        SELECT state, count(state) as quantity from lab group by state
+""")
+    List<LabCountDTO> countLabByState();
+
+    @Query("""
+        select name,enable_equipment as enable_quantity,(quantity-enable_equipment) as unable_quantity from lab
+""")
+    List<EnableEquipmentCount> countEnableEquipment();
+
+    @Query("""
+            select id,name,state,quantity,description,manager from lab;
+""")
+    List<LabDTO> findAllLabs();
 }
  //基于指定实验室管理员id,查看所有实验室

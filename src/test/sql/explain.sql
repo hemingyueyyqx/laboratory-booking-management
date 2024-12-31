@@ -183,7 +183,7 @@ FROM
        left JOIN
     course c ON a.teacher ->> '$.id' = c.teacher_id AND a.course ->> '$.id' = c.id
 WHERE
-    a.teacher ->> '$.id' = '01JFJ5CWY6FD4XTTHR42FBS6A4';
+    a.teacher ->> '$.id' = '01JFJ5CWY6FD4XTTHR42FBS6A4'and a.semester='24-2';
 explain
 SELECT
     a.teacher ->>'$.name' as teacherName,

@@ -16,10 +16,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TeacherController {
     private final TeacherService teacherService;
-    //获取指定老师的全部课表
-    @GetMapping("coursetable")
-    public ResultVo getCourses(@RequestAttribute("uid") String teacherId) {
-        return ResultVo.success(teacherService.getCourses(teacherId));
+    //获取指定老师id，和学期的全部课表
+    @GetMapping("coursetable/{semester}")
+    public ResultVo getCourses(@PathVariable String semester ,@RequestAttribute("uid") String teacherId) {
+        return ResultVo.success(teacherService.getCourses(semester,teacherId));
     }
     //获取老师的全部课程信息
     @GetMapping("courses")

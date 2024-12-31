@@ -34,8 +34,8 @@ public class LabManagerController {
         return ResultVo.success(labManagerService.listNews());
     }
     @PostMapping("lab")
-    public ResultVo updateLab(@RequestBody Lab lab) {
-        labManagerService.updateLab(lab);
+    public ResultVo updateLab(@RequestAttribute("role") String role,@RequestBody Lab lab) {
+        labManagerService.updateLab(role,lab);
         return ResultVo.ok();
     }
     @GetMapping("lab")

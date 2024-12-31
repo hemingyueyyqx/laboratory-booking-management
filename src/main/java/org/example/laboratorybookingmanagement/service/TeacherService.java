@@ -31,12 +31,12 @@ public class TeacherService {
     private final AppointmentRepository appointmentRepository;
     //指定老师id查全部课表
     @Transactional
-    public List<Appointment1> getCourses(String teacherId) {
+    public List<Appointment1> getCourses(String semester ,String teacherId) {
         User u  = userRepository.findById(teacherId).orElse(null);
         if(u == null) {
             throw XException.builder().number(Code.ERROR).message("老师不存在").build();
         }
-        return userRepository.findCourseByTeacherId(teacherId);
+        return userRepository.findCourseByTeacherIdAndSemester(semester,teacherId);
     }
     //基于老师id获取全部课程信息
     @Transactional
