@@ -25,6 +25,12 @@ WHERE
     a.teacher ->> '$.id' = :teacherId and a.semester=:semester
 """ , resultSetExtractorClass = Appointment1ResultSetExtractor.class)
     List<Appointment1> findCourseByTeacherIdAndSemester(String semester,String teacherId);
+    @Query(value = """
+select a.*,c.*
+from appointment a
+join  course c ON a.teacher ->> '$.id' = c.teacher_id AND a.course ->> '$.id' = c.id
+""" , resultSetExtractorClass = Appointment1ResultSetExtractor.class)
+    List<Appointment1> getallteacherstable();
 
 
     }

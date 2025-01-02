@@ -252,4 +252,7 @@ WHERE teacher ->> '$.id' = '01JFJ5CWY6FD4XTTHR42FBS6A4'
   AND course ->> '$.id' = '1';
 # 18、基于实验室id，渲染预约表
 explain
-select * from appointment a where a.lab_id = '1'
+select * from appointment a where a.lab_id = '1';
+select a.*,c.*
+from appointment a
+         join  course c ON a.teacher ->> '$.id' = c.teacher_id AND a.course ->> '$.id' = c.id

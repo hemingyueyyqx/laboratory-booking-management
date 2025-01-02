@@ -79,4 +79,12 @@ class TeacherServiceTest {
             log.debug("{}",c);
         }
     }
+
+    @Test
+    void getallteacherstable() {
+        List<Appointment1> appointment1List = teacherService.getallteacherstable("Js09");
+        for(Appointment1 a:appointment1List) {
+            log.debug("{}",a);
+        }
+    }
 }

@@ -81,7 +81,7 @@ public class LabManagerService {
         if(l == null) {
             throw XException.builder().number(Code.ERROR).message("实验室不存在").build();
         }
-        if(!role.equals("lM07")) {
+        if(!role.equals(User.LABMANAGER)) {
             throw XException.builder()
                     .code(Code.FORBIDDEN)
                     .number(Code.FORBIDDEN.getCode())

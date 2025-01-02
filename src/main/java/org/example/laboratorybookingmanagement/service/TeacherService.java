@@ -196,5 +196,17 @@ public class TeacherService {
         }
         appointmentRepository.deleteById(appointment.getId());
     }
+    //获取角色是老师的所有预约表加课程信息
+    public List<Appointment1> getallteacherstable(String role) {
+        if(!role.equals(User.Teacher)) {
+            throw XException.builder()
+                    .code(Code.FORBIDDEN)
+                    .number(Code.FORBIDDEN.getCode())
+                    .message(Code.FORBIDDEN.getMessage())
+                    .build();
+        }
+        List<Appointment1> appointment1List = userRepository.getallteacherstable();
+        return appointment1List;
+    }
 
 }

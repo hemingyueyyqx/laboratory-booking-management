@@ -83,4 +83,9 @@ public class TeacherController {
     public ResultVo deleteAppointment(@RequestBody Appointment appointment) {
         return ResultVo.ok();
     }
+    //获取角色是老师的所有预约表加课程信息
+    @GetMapping("allteacherstable")
+    public ResultVo getallteacherstable(@RequestAttribute("role") String role) {
+        return ResultVo.success(teacherService.getallteacherstable(role));
+    }
 }
