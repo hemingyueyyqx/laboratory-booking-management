@@ -22,9 +22,9 @@ public class TeacherController {
         return ResultVo.success(teacherService.getCourses(semester,teacherId));
     }
     //获取老师的全部课程信息
-    @GetMapping("courses")
-    public ResultVo getCoursesInfo(@RequestAttribute("uid") String teacherId) {
-        return ResultVo.success(teacherService.findCoursesByTeacherId(teacherId));
+    @GetMapping("courses/{semester}")
+    public ResultVo getCoursesInfo(@PathVariable String semester, @RequestAttribute("uid") String teacherId) {
+        return ResultVo.success(teacherService.findCoursesByTeacherId(semester,teacherId));
     }
     //添加课程
     @PostMapping("addcourse")

@@ -11,8 +11,8 @@ import java.util.List;
 
 @Repository
 public interface CourseRepository extends ListCrudRepository<Course,String> {
-
-    List<Course> findCoursesByTeacherId(String id);
+    @Query("select * from course c where c.teacher_id =:id and c.semester = :semester")
+    List<Course> findCoursesByTeacherIdAndSemester(String semester, String id);
     void deleteCoursesByTeacherId(String id);
     @Query("""
 SELECT COUNT(*) AS record_count

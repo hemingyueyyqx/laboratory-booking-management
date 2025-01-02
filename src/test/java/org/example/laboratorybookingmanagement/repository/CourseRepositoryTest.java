@@ -57,7 +57,7 @@ class CourseRepositoryTest {
 
     @Test
     void findCoursesByTeacherId() {
-        List<Course> courses = courseRepository.findCoursesByTeacherId("1");
+        List<Course> courses = courseRepository.findCoursesByTeacherIdAndSemester("24-1","01JFJ5CWY6FD4XTTHR42FBS6A4");
         for(Course c : courses) {
             log.debug("{}",c);
         }
