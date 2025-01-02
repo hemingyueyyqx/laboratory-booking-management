@@ -7,6 +7,9 @@ import org.example.laboratorybookingmanagement.service.UserService;
 import org.example.laboratorybookingmanagement.vo.ResultVo;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/admin/")
 @RequiredArgsConstructor
@@ -34,5 +37,10 @@ public class AdminController {
     @GetMapping("labs")
     public ResultVo listLabs() {
         return ResultVo.success(userService.listLabs());
+    }
+    @GetMapping("labstate")
+    public ResultVo showLabState(@RequestBody int week) {
+        Map<String, List<?>> labState = userService.getLabState(week);
+        return ResultVo.success(labState);
     }
 }
