@@ -40,7 +40,7 @@ public class TeacherService {
     }
     //基于老师id获取全部课程信息
     @Transactional
-    public List<Course> findCoursesByTeacherId(String semester, String id) {
+    public List<Course> findCoursesByTeacherIdAndSemaster(String semester, String id) {
         User u  = userRepository.findById(id).orElse(null);
         if(u == null) {
             throw XException.builder().number(Code.ERROR).message("老师不存在").build();

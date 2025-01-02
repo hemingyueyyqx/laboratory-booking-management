@@ -24,7 +24,7 @@ public class TeacherController {
     //获取老师的全部课程信息
     @GetMapping("courses/{semester}")
     public ResultVo getCoursesInfo(@PathVariable String semester, @RequestAttribute("uid") String teacherId) {
-        return ResultVo.success(teacherService.findCoursesByTeacherId(semester,teacherId));
+        return ResultVo.success(teacherService.findCoursesByTeacherIdAndSemaster(semester,teacherId));
     }
     //添加课程
     @PostMapping("addcourse")

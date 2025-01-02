@@ -24,11 +24,11 @@ class AppointmentRepositoryTest {
     @Test
     void save() {
         Appointment a = new Appointment().builder()
-                .course("{\"id\":\"7\",\"name\":\"大物实验\"}")
-                .teacher("{\"id\":\"8\",\"name\":\"kj\"}")
+                .course("{\"id\":\"2\",\"name\":\"大学物理\"}")
+                .teacher("{\"id\":\"01JFJ5CWY6FD4XTTHR42FBS6A4\",\"name\":\"王五\"}")
                 .labId("6")
                 .labName("906")
-                .semester("24-1")
+                .semester("24-2")
                 .week(2)
                 .dayofweek(1)
                 .section(1)

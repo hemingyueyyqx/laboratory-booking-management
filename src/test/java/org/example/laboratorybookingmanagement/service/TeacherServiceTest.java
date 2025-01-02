@@ -2,6 +2,7 @@ package org.example.laboratorybookingmanagement.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.laboratorybookingmanagement.dox.Appointment;
+import org.example.laboratorybookingmanagement.dox.Course;
 import org.example.laboratorybookingmanagement.dox.Lab;
 import org.example.laboratorybookingmanagement.dto.Appointment1;
 import org.junit.jupiter.api.Test;
@@ -69,5 +70,13 @@ class TeacherServiceTest {
                 .nature("课程预约")
                 .build();
         teacherService.appointCourse(a);
+    }
+
+    @Test
+    void findCoursesByTeacherIdAndSemaster() {
+        List<Course> courses = teacherService.findCoursesByTeacherIdAndSemaster("24-2","01JFJ5CWY6FD4XTTHR42FBS6A4");
+        for (Course c: courses) {
+            log.debug("{}",c);
+        }
     }
 }
