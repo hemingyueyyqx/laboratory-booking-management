@@ -68,9 +68,9 @@ public class TeacherController {
         return ResultVo.success(teacherService.getLabs(teacherId,courseId ));
     }
     ////基于实验室id，查预约表
-    @GetMapping("appointment/{labId}")
-    public ResultVo getAppointment(@PathVariable String labId) {
-        return ResultVo.success(teacherService.getAppointment(labId));
+    @GetMapping("appointment/{semester}/{labId}")
+    public ResultVo getAppointment(@PathVariable String semester, @PathVariable String labId) {
+        return ResultVo.success(teacherService.getAppointment(semester,labId));
     }
     //预约课程
     @PostMapping("appointment")
@@ -79,8 +79,9 @@ public class TeacherController {
         return ResultVo.ok();
     }
     //基于老师id,课程id移除对应的预约信息
-    @PostMapping("deleteappointment")
-    public ResultVo deleteAppointment(@RequestBody Appointment appointment) {
+    @PostMapping("deleteappointment/{courseId}")
+    public ResultVo deleteAppointment(@RequestAttribute("uid")String teacherId,@PathVariable String courseId  ) {
+        teacherService.deleteAppointment(teacherId,courseId);
         return ResultVo.ok();
     }
     //获取角色是老师的所有预约表加课程信息

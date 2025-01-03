@@ -172,12 +172,12 @@ public class TeacherService {
     }
     //基于实验室id，查预约表
     @Transactional
-    public List<Appointment> getAppointment(String labId) {
+    public List<Appointment> getAppointment(String  semester, String labId) {
         Lab lab = labRepository.findById(labId).orElse(null);
         if(lab == null) {
             throw new XException().builder().number(Code.ERROR).message("实验室不存在").build();
         }
-     return appointmentRepository.findAllByLabId(labId);
+     return appointmentRepository.findAllByLabIdAndSemester(semester,labId);
     }
     //预约课程
     @Transactional
@@ -207,6 +207,15 @@ public class TeacherService {
         }
         List<Appointment1> appointment1List = userRepository.getallteacherstable();
         return appointment1List;
+    }
+    //删除预约记录
+    public  void deleteAppointment(String tid,String cid) {
+        User u = userRepository.findById(tid).orElse(null);
+        Course c = courseRepository.findById(cid).orElse(null);
+        if(u == null || c == null) {
+            throw new XException().builder().number(Code.ERROR).message("老师或课程不存在").build();
+        }
+        appointmentRepository.deleteAllByTeacherAndCourse(tid,cid);
     }
 
 }

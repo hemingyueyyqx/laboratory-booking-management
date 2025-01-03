@@ -255,4 +255,5 @@ explain
 select * from appointment a where a.lab_id = '1';
 select a.*,c.*
 from appointment a
-         join  course c ON a.teacher ->> '$.id' = c.teacher_id AND a.course ->> '$.id' = c.id
+         join  course c ON a.teacher ->> '$.id' = c.teacher_id AND a.course ->> '$.id' = c.id;
+delete from appointment a where a.teacher ->> '$.id'='01JGDSFFQ6SSR6B0743BVSYF3S' and a.course ->> '$.id' = '0';

@@ -15,8 +15,8 @@ class AppointmentRepositoryTest {
     @Autowired
     private  AppointmentRepository appointmentRepository;
     @Test
-    void findAppointmentByLabId() {
-        List<Appointment> appointments = appointmentRepository.findAllByLabId("1");
+    void findAllByLabIdAndSemester() {
+        List<Appointment> appointments = appointmentRepository.findAllByLabIdAndSemester("24-1", "5");
         for (Appointment a : appointments) {
             log.debug("{}",a);
         }
@@ -37,4 +37,8 @@ class AppointmentRepositoryTest {
         appointmentRepository.save(a);
     }
 
+    @Test
+    void deleteAllByTeacherAndCourse() {
+        appointmentRepository.deleteAllByTeacherAndCourse("01JFJ5CWY6FD4XTTHR42FBS6A4","1");
+    }
 }

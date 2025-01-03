@@ -11,7 +11,8 @@ import java.util.List;
 
 @Repository
 public interface AppointmentRepository extends ListCrudRepository<Appointment,String> {
-    List<Appointment> findAllByLabId(String labId);
+    @Query("select * from appointment a where a.lab_id=:labId and a.semester=:semester")
+    List<Appointment> findAllByLabIdAndSemester(String semester,String labId);
 //    @Modifying
 //    @Query("""
 //delete from appointment a where a.teacher ->> '$.id'=:teacherId and a.course ->> '$.id'=:courseId
@@ -21,4 +22,7 @@ public interface AppointmentRepository extends ListCrudRepository<Appointment,St
     select dayofweek,count(distinct lab_id) as quantity from appointment where week=:week group by dayofweek;
 """)
 List<LabCountByDayofweekDTO> countLabByDayofweek(int week);
+@Modifying
+@Query("delete from appointment a where a.teacher ->> '$.id'=:tid and a.course ->> '$.id' = :cid")
+void deleteAllByTeacherAndCourse(String tid,String cid);
 }
