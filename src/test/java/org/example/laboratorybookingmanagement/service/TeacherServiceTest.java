@@ -59,12 +59,12 @@ class TeacherServiceTest {
     @Test
     void appointCourse() {
         Appointment a = new Appointment().builder()
-                .course("{\"id\":\"9\",\"name\":\"ghj\"}")
-                .teacher("{\"id\":\"8\",\"name\":\"kj\"}")
+                .course("{\"id\":\"1\",\"name\":\"高等数学\"}")
+                .teacher("{\"id\":\"01JFJ5CWY6FD4XTTHR42FBS6A4\",\"name\":\"王五\"}")
                 .labId("6")
                 .labName("906")
-                .semester("24-1")
-                .week(4)
+                .semester("24-2")
+                .week(1)
                 .dayofweek(1)
                 .section(1)
                 .nature("课程预约")

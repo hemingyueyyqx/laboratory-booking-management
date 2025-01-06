@@ -28,8 +28,8 @@ public class TeacherController {
     }
     //添加课程
     @PostMapping("addcourse")
-    public ResultVo addCourse(@RequestBody Course course) {
-        teacherService.addCourse(course);
+    public ResultVo addCourse(@RequestAttribute("role") String role, @RequestBody Course course) {
+        teacherService.addCourse(role, course);
         return ResultVo.ok();
     }
     //更新课程

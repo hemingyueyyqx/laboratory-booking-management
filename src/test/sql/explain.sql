@@ -253,7 +253,9 @@ WHERE teacher ->> '$.id' = '01JFJ5CWY6FD4XTTHR42FBS6A4'
 # 18、基于实验室id，渲染预约表
 explain
 select * from appointment a where a.lab_id = '1';
+#19、查所有course表，appointment表
 select a.*,c.*
 from appointment a
-         join  course c ON a.teacher ->> '$.id' = c.teacher_id AND a.course ->> '$.id' = c.id;
+join  course c ON a.teacher ->> '$.id' = c.teacher_id AND a.course ->> '$.id' = c.id;
+# 20、基于课程id,老师id,删除预约记录
 delete from appointment a where a.teacher ->> '$.id'='01JGDSFFQ6SSR6B0743BVSYF3S' and a.course ->> '$.id' = '0';

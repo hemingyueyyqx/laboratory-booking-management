@@ -49,8 +49,14 @@ public class TeacherService {
     }
     //添加课程
     @Transactional
-    public void addCourse(Course course ) {
-
+    public void addCourse(String role, Course course ) {
+        if(!role.equals(User.Teacher)) {
+            throw XException.builder()
+                    .code(Code.FORBIDDEN)
+                    .number(Code.FORBIDDEN.getCode())
+                    .message(Code.FORBIDDEN.getMessage())
+                    .build();
+        }
         courseRepository.save(course);
     }
     //基于课程id删除某一门课
