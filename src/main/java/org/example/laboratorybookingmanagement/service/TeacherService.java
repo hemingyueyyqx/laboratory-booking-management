@@ -49,7 +49,7 @@ public class TeacherService {
     }
     //添加课程
     @Transactional
-    public void addCourse(String role, Course course ) {
+    public void addCourse(String role,String teacherId, Course course ) {
         if(!role.equals(User.Teacher)) {
             throw XException.builder()
                     .code(Code.FORBIDDEN)
@@ -57,6 +57,7 @@ public class TeacherService {
                     .message(Code.FORBIDDEN.getMessage())
                     .build();
         }
+        course.setTeacherId(teacherId);
         courseRepository.save(course);
     }
     //基于课程id删除某一门课
@@ -76,7 +77,7 @@ public class TeacherService {
     //基于老师id和多个id删除多门课
         @Transactional(rollbackFor = XException.class)
         public void deleteCoursesByIds(String teacherId, List<String> ids) {
-            StringBuilder errorMessage = new StringBuilder("以下课程存在问题：");
+            StringBuilder errorMessage = new StringBuilder();
             boolean hasNonExistentCourse = false;
             boolean hasCourseWithAppointments = false;
             StringBuilder nonExistentCourseIds = new StringBuilder();
@@ -89,7 +90,7 @@ public class TeacherService {
                     if (nonExistentCourseIds.length() > 0) {
                         nonExistentCourseIds.append(" ");
                     }
-                    nonExistentCourseIds.append(id);
+                    nonExistentCourseIds.append(c.getName());
                     continue;
                 }
 
@@ -99,19 +100,19 @@ public class TeacherService {
                     if (courseIdsWithAppointments.length() > 0) {
                         courseIdsWithAppointments.append(", ");
                     }
-                    courseIdsWithAppointments.append(id);
+                    courseIdsWithAppointments.append(c.getName());
                 }
             }
 
             if (hasNonExistentCourse) {
-                errorMessage.append("不存在的课程ID：");
+                errorMessage.append("不存在的课程：");
                 errorMessage.append(nonExistentCourseIds.toString());
             }
             if (hasCourseWithAppointments) {
                 if (hasNonExistentCourse) {
                     errorMessage.append("；");
                 }
-                errorMessage.append("存在预约记录的课程ID,请先移除预约记录：");
+                errorMessage.append("存在有预约记录的课程,请先移除预约记录：");
                 errorMessage.append(courseIdsWithAppointments.toString());
             }
 

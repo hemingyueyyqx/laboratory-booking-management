@@ -28,12 +28,12 @@ public class TeacherController {
     }
     //添加课程
     @PostMapping("addcourse")
-    public ResultVo addCourse(@RequestAttribute("role") String role, @RequestBody Course course) {
-        teacherService.addCourse(role, course);
+    public ResultVo addCourse(@RequestAttribute("role") String role,@RequestAttribute("uid") String teacherId, @RequestBody Course course) {
+        teacherService.addCourse(role,teacherId, course);
         return ResultVo.ok();
     }
     //更新课程
-    @PostMapping("updatecourse")
+    @PutMapping("updatecourse")
     public ResultVo postCourse(@RequestBody Course course) {
         teacherService.updateCourse(course);
         return ResultVo.ok();
