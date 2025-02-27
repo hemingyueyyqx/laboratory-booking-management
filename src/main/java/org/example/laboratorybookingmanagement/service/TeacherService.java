@@ -216,13 +216,42 @@ public class TeacherService {
         return appointment1List;
     }
     //删除预约记录
-    public  void deleteAppointment(String tid,String cid) {
+    public  void deleteAppointment(String tid,String semester,List<String> courseIds) {
         User u = userRepository.findById(tid).orElse(null);
-        Course c = courseRepository.findById(cid).orElse(null);
+//        Course c = courseRepository.findById(cid).orElse(null);
+        if(u == null) {
+            throw new XException().builder().number(Code.ERROR).message("老师不存在").build();
+        }
+        for(String cid:courseIds) {
+            if(cid == null) {
+                throw new XException().builder().number(Code.ERROR).message("课程不存在").build();
+            }
+            appointmentRepository.deleteAllByTeacherAndCourse(tid,cid,semester);
+        }
+
+    }
+    ////删除指定课程id,指定学期，指定周次的预约记录
+    public void deleteAppointment1(String tid,String role,Appointment1 appointment1) {
+        if(!role.equals(User.Teacher)) {
+            throw XException.builder()
+                    .code(Code.FORBIDDEN)
+                    .number(Code.FORBIDDEN.getCode())
+                    .message(Code.FORBIDDEN.getMessage())
+                    .build();
+        }
+        User u = userRepository.findById(tid).orElse(null);
+        Course c = courseRepository.findById(appointment1.getCourseId()).orElse(null);
         if(u == null || c == null) {
             throw new XException().builder().number(Code.ERROR).message("老师或课程不存在").build();
         }
-        appointmentRepository.deleteAllByTeacherAndCourse(tid,cid);
+        for(int i = 0;i<appointment1.getWeeks().length;i++) {
+            appointmentRepository.deleteAllByTeacherAndCourseAndSemesterAndWeeks(
+                    tid,appointment1.getCourseId(),
+                    appointment1.getLabId(),
+                    appointment1.getSemester(),
+                    appointment1.getWeeks()[i]);
+        }
+
     }
 
 }

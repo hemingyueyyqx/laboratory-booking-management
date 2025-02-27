@@ -39,6 +39,6 @@ class AppointmentRepositoryTest {
 
     @Test
     void deleteAllByTeacherAndCourse() {
-        appointmentRepository.deleteAllByTeacherAndCourse("01JFJ5CWY6FD4XTTHR42FBS6A4","1");
+        appointmentRepository.deleteAllByTeacherAndCourse("01JFJ5CWY6FD4XTTHR42FBS6A4","1","24-2");
     }
 }

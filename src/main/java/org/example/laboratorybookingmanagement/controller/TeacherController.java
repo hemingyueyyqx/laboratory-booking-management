@@ -79,14 +79,20 @@ public class TeacherController {
         return ResultVo.ok();
     }
     //基于老师id,课程id移除对应的预约信息
-    @PostMapping("deleteappointment/{courseId}")
-    public ResultVo deleteAppointment(@RequestAttribute("uid")String teacherId,@PathVariable String courseId  ) {
-        teacherService.deleteAppointment(teacherId,courseId);
+    @PostMapping("deleteappointments/{semester}")
+    public ResultVo deleteAppointment(@RequestAttribute("uid")String teacherId,@PathVariable String semester,@RequestBody List<String> courseIds) {
+        teacherService.deleteAppointment(teacherId,semester,courseIds);
         return ResultVo.ok();
     }
     //获取角色是老师的所有预约表加课程信息
     @GetMapping("allteacherstable")
     public ResultVo getallteacherstable(@RequestAttribute("role") String role) {
         return ResultVo.success(teacherService.getallteacherstable(role));
+    }
+    //删除指定课程id,指定学期，指定周次的预约记录
+    @PostMapping("deleteappointment")
+    public ResultVo deleteAppointment(@RequestAttribute("uid")String tid,@RequestAttribute("role")String role,@RequestBody Appointment1 appointment1) {
+        teacherService.deleteAppointment1(tid,role,appointment1);
+        return ResultVo.ok();
     }
 }

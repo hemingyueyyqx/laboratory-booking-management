@@ -17,4 +17,9 @@ import java.util.List;
 public class Appointment1{
     private Appointment appointment;
     private Course course;
+    private String courseId;
+    private String semester;
+    private String labId;
+    private int[] weeks;
+
 }

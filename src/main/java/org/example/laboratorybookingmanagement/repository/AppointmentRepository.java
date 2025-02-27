@@ -23,6 +23,9 @@ public interface AppointmentRepository extends ListCrudRepository<Appointment,St
 """)
 List<LabCountByDayofweekDTO> countLabByDayofweek(int week);
 @Modifying
-@Query("delete from appointment a where a.teacher ->> '$.id'=:tid and a.course ->> '$.id' = :cid")
-void deleteAllByTeacherAndCourse(String tid,String cid);
+@Query("delete from appointment a where a.teacher ->> '$.id'=:tid and a.course ->> '$.id' = :cid and a.semester=:semester")
+void deleteAllByTeacherAndCourse(String tid, String cid, String semester);
+@Modifying
+    @Query("delete from appointment a where a.teacher ->> '$.id'=:tid and a.course ->> '$.id' = :cid and a.semester=:semester and a.week=:week and a.lab_id=:labId")
+    void deleteAllByTeacherAndCourseAndSemesterAndWeeks(String tid,String cid,String labId,String semester,int week);
 }
