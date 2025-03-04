@@ -9,8 +9,10 @@ import org.example.laboratorybookingmanagement.service.LabManagerService;
 import org.example.laboratorybookingmanagement.vo.ResultVo;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/api/labmanager/")
+@RequestMapping("/api/labadmin/")
 @RequiredArgsConstructor
 public class LabManagerController {
     private final LabManagerService labManagerService;
@@ -24,14 +26,18 @@ public class LabManagerController {
         labManagerService.updateNews(role,news);
         return ResultVo.ok();
     }
-    @DeleteMapping("news/{newsId}")
-    public ResultVo deleteNews(@RequestAttribute("role") String role,@PathVariable String newsId) {
-        labManagerService.deleteNews(role,newsId);
+    @DeleteMapping("news/{newsIds}")
+    public ResultVo deleteNews(@RequestAttribute("role") String role,@PathVariable List<String> newsIds) {
+        labManagerService.deleteNews(role,newsIds);
         return ResultVo.ok();
     }
     @GetMapping("news")
     public ResultVo listNews() {
         return ResultVo.success(labManagerService.listNews());
+    }
+    @GetMapping("news/{author}")
+    public ResultVo listNewsById(@PathVariable String author) {
+        return ResultVo.success(labManagerService.listNewsByAuthor(author));
     }
     @PostMapping("lab")
     public ResultVo updateLab(@RequestAttribute("role") String role,@RequestBody Lab lab) {

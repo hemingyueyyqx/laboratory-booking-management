@@ -37,12 +37,12 @@ public class LabManagerService {
     }
     //删除公告
     @Transactional
-    public void deleteNews(String role,String id) {
-        News n = newsRepository.findById(id).orElse(null);
-        if(n == null) {
-            throw XException.builder().number(Code.ERROR).message("公告不存在").build();
-
-        }
+    public void deleteNews(String role,List<String> ids) {
+//        News n = newsRepository.findById(id).orElse(null);
+//        if(n == null) {
+//            throw XException.builder().number(Code.ERROR).message("公告不存在").build();
+//
+//        }
         if(!role.equals("lM07")) {
             throw XException.builder()
                     .code(Code.FORBIDDEN)
@@ -50,7 +50,10 @@ public class LabManagerService {
                     .message(Code.FORBIDDEN.getMessage())
                     .build();
         }
-        newsRepository.deleteById(id);
+        for(String id:ids) {
+            newsRepository.deleteById(id);
+        }
+
     }
     //修改公告
     @Transactional
@@ -73,6 +76,11 @@ public class LabManagerService {
     @Transactional
     public List<News> listNews() {
         return newsRepository.findAll();
+    }
+    //基于Author查看全部公告
+    @Transactional
+    public List<News> listNewsByAuthor(String author) {
+        return newsRepository.findByAuthor(author);
     }
      //修改实验室状态
     @Transactional

@@ -73,7 +73,10 @@ create table if not exists `news` (
     content varchar(2000) not null ,
     author varchar(50) not null ,
     create_time datetime not null default current_timestamp,
-    update_time datetime not null default current_timestamp on update current_timestamp
+    update_time datetime not null default current_timestamp on update current_timestamp,
+    unique (author),
+    index (title)
+
     );
 
 # INSERT INTO `course` (id, name, quantity,  semester,  clazz, type, teacher_id,  experiment_hour) VALUES
@@ -84,7 +87,7 @@ create table if not exists `news` (
 # ('5', '基础化学', 80, '24-1', '化学工程与工艺', 1, 2, 8),
 # ('6', '英语听力', 100, '24-1', '英语', 1, 1, 8);
 
--- 插入第一条记录
+# -- 插入第一条记录
 # INSERT INTO `lab` (`id`, `name`, `state`, `quantity`, `description`, `manager`, `enable_equipment`)
 # VALUES ('00000000000000000000000001', '901', 1, 50, '这是一个功能齐全的实验室', '{"id": "111111", "name": "张经理"}', 45);
 #

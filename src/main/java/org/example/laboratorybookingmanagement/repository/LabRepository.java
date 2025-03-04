@@ -1,6 +1,7 @@
 package org.example.laboratorybookingmanagement.repository;
 
 import org.example.laboratorybookingmanagement.dox.Lab;
+import org.example.laboratorybookingmanagement.dox.News;
 import org.example.laboratorybookingmanagement.dto.EnableEquipmentCount;
 import org.example.laboratorybookingmanagement.dto.LabCountDTO;
 import org.example.laboratorybookingmanagement.dto.LabDTO;
@@ -29,7 +30,7 @@ WHERE c.teacher_id =:teacherId and c.id = :courseId and l.state =1;
 """)
     List<Lab> findBadLabs(String teacherId, String courseId);
     @Query("""
-select * from lab l where l.manager ->> '$.id' =:id
+select * from lab l where l.manager ->> '$.id' =:id and l.state=1;
 """)
     List<Lab> findLabs(String id);
     @Query("""
@@ -47,4 +48,3 @@ select * from lab l where l.manager ->> '$.id' =:id
 """)
     List<LabDTO> findAllLabs();
 }
- //基于指定实验室管理员id,查看所有实验室

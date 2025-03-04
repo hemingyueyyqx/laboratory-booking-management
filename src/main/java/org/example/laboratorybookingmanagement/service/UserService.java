@@ -82,5 +82,13 @@ public class UserService {
                 "labCountByDayofweekDTOList",labCountByDayofweekDTOList,
                 "enableEquipmentCountList",enableEquipmentCountList);
     }
+    //删除用户
+    @Transactional
+    public void deleteUser(List<String> uids) {
+        for(String uid : uids) {
+            userRepository.deleteById(uid);
+        }
+
+    }
 
 }

@@ -43,4 +43,10 @@ public class AdminController {
         Map<String, List<?>> labState = userService.getLabState(week);
         return ResultVo.success(labState);
     }
+    //删除用户
+    @DeleteMapping("users/{ids}")
+    public ResultVo deleteUser(@PathVariable List<String> ids) {
+        userService.deleteUser(ids);
+        return ResultVo.ok();
+    }
 }
