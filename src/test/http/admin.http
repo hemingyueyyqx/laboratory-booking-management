@@ -1,10 +1,10 @@
 POST http://localhost:8080/api/admin/users
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIwMUpGSFhaTlNENjZONTVFSE1OSlM1WUVQUiIsInJvbGUiOiJTajA4IiwiaWF0IjoxNzM0NzA4NjU0LCJleHAiOjE3MzQ3OTUwNTR9.Q_soYYAGPIKhF7Q7kBV2SIjSf3ZwWX0VipHNTerWgy8
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiU2owOCIsInVpZCI6IjAxSk45MVcwRkhIREFGV1I0VEZYNDE0TjdaIiwiaWF0IjoxNzQwODkxODk1LCJleHAiOjE3NDA5NzgyOTV9.mMa79Qr1cui_ipcNlh7Os5eE-82weH3LDexZY43QVCI
 Content-Type: application/json
 
 {
-  "name": "sjj",
-  "account": "2022220976",
+  "name": "hmy",
+  "account": "2022222979",
   "role": "Js09",
   "telephone": "18345930160"
 }

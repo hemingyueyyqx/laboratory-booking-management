@@ -19,7 +19,7 @@ create table if not exists `course`
     quantity tinyint unsigned not null ,/**人数*/
     semester char(4) not null ,/**学期，用下拉框，让老师们选*/
     clazz varchar(30) not null,/**上课班级*/
-    type tinyint unsigned check ( 0 or 1),/**必修课，选修课*/
+    type tinyint unsigned check (type in (0, 1)),/**必修课，选修课*/
     teacher_id char(26) not null,
     experiment_hour tinyint unsigned not null,/**实验学时,到时候可以校验一下（当老师选的学时还有剩余时）*/
     index(teacher_id,semester)
