@@ -59,6 +59,9 @@ public class UserService {
     //管理员添加用户
     @Transactional
     public void addUser(User user) {
+        if(userRepository.findByAccount(user.getAccount()) != null) {
+            throw  XException.builder().number(Code.ERROR).message("用户已存在").build();
+        }
         user.setPassword(passwordEncoder.encode(user.getAccount()));
         userRepository.save(user);
     }
