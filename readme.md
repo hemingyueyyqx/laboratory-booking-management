@@ -43,3 +43,11 @@ label标签，901，902，人数限制，人数不够的实验室列出不让选
 
 json冗余形式on关联时命中不了索引，针对MySQL索引字段使用函数，则索引失效，MySQL的bug,拍平，不用json。
 水平越权，基于课程id删除课程，必须带token,业务层处理，用自带的方法，不用写语句。
+
+**2025/03/13**
+
+**.env问题**
+EnvFile插件可以使项目在开发环境下识别.env文件，但是在测试环境确实别不了
+
+
+<a href="https://blog.csdn.net/agonie201218/article/details/129396503">maven打包跳过测试</a>
