@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mysql://${dhost}/lab_management_hmy
-    username: root
-    password: ${mysql_pwd}
+    username: ${dusername}
+    password: ${dpassword}
 #  spring.sql.init.mode：该属性用于控制 SQL 脚本的初始化模式。always 表示每次应用启动时都会执行 SQL 脚本进行数据库初始化。其他可选值包括 never（从不执行）、embedded（仅对嵌入式数据库执行）等。
   sql:
     init:
