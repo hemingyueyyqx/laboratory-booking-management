@@ -61,4 +61,4 @@ springdoc:
 #  appsecret: ${dingtalk_appsecret}
 #  agentid: ${dingtalk_agentid}
 my:
-  secretkey: ${secretkey}
+  secretkey: Jsbjfhjj09
